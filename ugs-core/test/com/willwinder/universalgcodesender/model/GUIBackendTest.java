@@ -38,6 +38,7 @@ import org.mockito.ArgumentCaptor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -335,7 +336,7 @@ public class GUIBackendTest {
         ControllerStatus controllerStatus = new ControllerStatus(ControllerState.IDLE, new Position(0,0,0), new Position(0,0,0));
         when(controller.getControllerStatus()).thenReturn(controllerStatus);
 
-        File tempFile = File.createTempFile("ugs-", ".gcode");
+        File tempFile = Files.createTempFile("ugs-", ".gcode").toFile();
         FileUtils.writeStringToFile(tempFile, "G0 X0 Y0\n", StandardCharsets.UTF_8);
         instance.setGcodeFile(tempFile);
 
@@ -356,7 +357,7 @@ public class GUIBackendTest {
     @Test
     public void canSendShouldReturnFalseIfNotConnectedAndFileLoaded() throws Exception {
         // Given
-        File tempFile = File.createTempFile("ugs-", ".gcode");
+        File tempFile = Files.createTempFile("ugs-", ".gcode").toFile();
         FileUtils.writeStringToFile(tempFile, "G0 X0 Y0\n", StandardCharsets.UTF_8);
         instance.setGcodeFile(tempFile);
 
@@ -451,7 +452,7 @@ public class GUIBackendTest {
         // Given
         instance.connect(FIRMWARE, PORT, BAUD_RATE);
 
-        File tempFile = File.createTempFile("ugs-", ".gcode");
+        File tempFile = Files.createTempFile("ugs-", ".gcode").toFile();
         FileUtils.writeStringToFile(tempFile, "G0 X0 Y0\n", StandardCharsets.UTF_8);
 
         // When

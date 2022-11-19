@@ -73,7 +73,7 @@ public class S3FileSystemViewTest {
     }
     
     private File createFileWith(byte[] contents) throws IOException {
-        File f = File.createTempFile("foo", "bar");
+        File f = Files.createTempFile("foo", "bar").toFile();
         f.deleteOnExit();
         if (contents != null) {
             Files.write(f.toPath(), contents);

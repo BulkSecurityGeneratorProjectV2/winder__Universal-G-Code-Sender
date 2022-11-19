@@ -114,7 +114,7 @@ public class FixturesTest {
 
         // gcp needs its input from a normal file; copy from resource to a temp file
         URL file = this.getClass().getClassLoader().getResource(inputFixture);
-        File tempFile = File.createTempFile(fixtureName, "input");
+        File tempFile = Files.createTempFile(fixtureName, "input").toFile();
         IOUtils.copy(file.openStream(), FileUtils.openOutputStream(tempFile));
 
         // process the input file and write it to the output temp file

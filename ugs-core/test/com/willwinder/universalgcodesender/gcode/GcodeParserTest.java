@@ -295,7 +295,7 @@ public class GcodeParserTest {
 
         // Copy resource to temp file since my parser methods need it that way.
         URL file = this.getClass().getClassLoader().getResource("./gcode/circle_test.nc");
-        File tempFile = File.createTempFile("temp", "file");
+        File tempFile = Files.createTempFile("temp", "file").toFile();
         IOUtils.copy(file.openStream(), FileUtils.openOutputStream(tempFile));
 
         try (IGcodeWriter gcw = new GcodeStreamWriter(output.toFile())) {
